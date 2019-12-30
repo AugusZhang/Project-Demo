@@ -1,0 +1,15 @@
+//
+//  AppDelegate+Guaid.h
+//  AgriculturalProduct
+//
+//  Created by 古鹏 on 2017/10/27.
+//  Copyright © 2017年 cjwsc. All rights reserved.
+//
+
+#import "AppDelegate.h"
+
+@interface AppDelegate (Guaid)
+
+@property (nonatomic, strong) UIWindow* guaidWindow;
+
+@end

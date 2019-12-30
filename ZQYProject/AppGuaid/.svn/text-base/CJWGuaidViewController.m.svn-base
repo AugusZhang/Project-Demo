@@ -1,0 +1,213 @@
+//
+//  CJWGuaidViewController.m
+//  AgriculturalProduct
+//
+//  Created by 古鹏 on 2017/10/27.
+//  Copyright © 2017年 cjwsc. All rights reserved.
+//
+
+#import "CJWGuaidViewController.h"
+#import "CJWGuaidViewCell.h"
+#import "YCGuaidTipView.h"
+
+@interface CJWGuaidViewController ()<
+UICollectionViewDataSource,
+UICollectionViewDelegateFlowLayout>
+
+//@property (nonatomic, strong) UIPageControl* pageControl;
+@property (nonatomic, strong) UICollectionView* collectionView;
+
+@property (nonatomic, strong) UIButton* hiddenBtn;
+@property(nonatomic, strong) UIButton *jumpOutBtn;
+@property(nonatomic, strong) YCGuaidTipView *tipView;
+
+@end
+
+@implementation CJWGuaidViewController
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    [self setupSubviews];
+    [self vhl_setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)setupSubviews{
+    NSArray *imageArray;
+//    if (kScreenHeight < 568) {
+//        //小屏(4s)
+//        imageArray = @[@"page_one_smal",@"page_two_smal",@"page_three_small"];
+//    }else if (kScreenHeight >= 568 && kScreenHeight < 812){
+//        //5、SE、6、7、8
+//        imageArray = @[@"page_one_middle",@"page_two_middle",@"page_three_middle"];
+//    }else{
+//        //X系列
+//        imageArray = @[@"page_one_x",@"page_two_x",@"page_three_x"];
+//    }
+    imageArray = @[@"page_one",@"page_two",@"page_three"];
+    self.imageNames = imageArray;
+   
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumLineSpacing = 0;
+    layout.minimumInteritemSpacing = 0;
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    self.collectionView.bounces = NO;
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.pagingEnabled = YES;
+    self.collectionView.showsVerticalScrollIndicator = NO;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.backgroundColor = self.view.backgroundColor;
+    [self.collectionView registerClass:[CJWGuaidViewCell class] forCellWithReuseIdentifier:CJWGuaidViewCellID];
+    
+    [self.view addSubview:self.collectionView];
+    
+//    self.pageControl = [[UIPageControl alloc] init];
+//    self.pageControl.userInteractionEnabled = NO;
+//    self.pageControl.hidesForSinglePage = YES;
+//    self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+//    self.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
+//    self.pageControl.numberOfPages = self.imageNames.count;
+//    [self.view addSubview:self.pageControl];
+    
+//    __unused NSString* hiddenBtnImageName = self.property[kHiddenBtnImageName];
+    
+    self.hiddenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.hiddenBtn.layer.cornerRadius = 49.0/2;
+    self.hiddenBtn.layer.masksToBounds = YES;
+    
+    CAGradientLayer *gl = [CAGradientLayer layer];
+    gl.frame = CGRectMake(0,0,120,49);
+    gl.startPoint = CGPointMake(0, 0);
+    gl.endPoint = CGPointMake(1, 1);
+    gl.colors = @[(__bridge id)[UIColor colorWithRed:108/255.0 green:110/255.0 blue:251/255.0 alpha:1.0].CGColor, (__bridge id)[UIColor colorWithRed:155/255.0 green:103/255.0 blue:255/255.0 alpha:1.0].CGColor];
+    gl.locations = @[@(0), @(1.0f)];
+    [self.hiddenBtn.layer addSublayer:gl];
+    [self.hiddenBtn setTitle:@"立即体验" forState:UIControlStateNormal];
+    self.hiddenBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.hiddenBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+//    self.hiddenBtn.layer.borderWidth = 1.0;
+//    self.hiddenBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    [self.hiddenBtn addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
+    [self.hiddenBtn addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.hiddenBtn];
+    [self.view bringSubviewToFront:self.hiddenBtn];
+    [self.hiddenBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.bottom.equalTo(self.view.bottom).offset(-40*kScal);
+        make.height.equalTo(49);
+        make.width.equalTo(120);
+    }];
+    self.hiddenBtn.hidden = YES;
+    self.jumpOutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.jumpOutBtn setTitle:@"跳过>" forState:UIControlStateNormal];
+    self.jumpOutBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [self.jumpOutBtn setTitleColor:RGB(99, 99, 99) forState:UIControlStateNormal];
+    [self.jumpOutBtn setBackgroundColor:[UIColor clearColor]];
+    [self.jumpOutBtn addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
+    self.jumpOutBtn.titleLabel.textAlignment = NSTextAlignmentRight;
+    [self.view addSubview:self.jumpOutBtn];
+    [self.view bringSubviewToFront:self.jumpOutBtn];
+    [self.jumpOutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view).offset(-32*kScal);
+        make.top.equalTo(self.view).offset(50*kScal);
+        make.height.equalTo(22*kScal);
+        make.width.equalTo(48*kScal);
+    }];
+    
+    self.jumpOutBtn.layer.cornerRadius = 2;
+    self.jumpOutBtn.layer.masksToBounds = YES;
+    self.jumpOutBtn.backgroundColor = RGB(204, 204, 204);
+    
+    self.tipView = [[YCGuaidTipView alloc] init];
+    [self.view addSubview:self.tipView];
+    [self.tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-70*kScal);
+    }];
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    self.collectionView.frame = self.view.bounds;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.imageNames.count;
+}
+
+- (__kindof UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CJWGuaidViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CJWGuaidViewCellID forIndexPath:indexPath];
+    cell.contentImageView.image = [UIImage imageNamed:self.imageNames[indexPath.row]];
+//    cell.contentImageView.backgroundColor = RGB(22+50*indexPath.row, 20+50*indexPath.row, 100);
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return collectionView.bounds.size;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    long current = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
+    
+//    self.pageControl.currentPage = lroundf(current);
+    
+//    NSString* lastImageName = self.imageNames.lastObject;
+//
+//    self.hiddenBtn.hidden = [lastImageName isEqualToString:kLastNullImageName] || self.imageNames.count - 1 != current ;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    const CGFloat perPageWidth = CGRectGetWidth(scrollView.bounds);
+    NSUInteger page = ceilf(scrollView.contentOffset.x / perPageWidth);
+    
+    if (page == self.imageNames.count-1) {
+        self.jumpOutBtn.hidden = YES;
+        self.hiddenBtn.hidden = NO;
+        self.tipView.hidden = YES;
+    }else{
+        self.jumpOutBtn.hidden = NO;
+        self.hiddenBtn.hidden = YES;
+        self.tipView.hidden = NO;
+    }
+    
+    for (int i = 0; i<self.imageNames.count; i++) {
+        UIImageView *imageView = [self.tipView viewWithTag:1000+i];
+        if (page == i) {
+            imageView.image = [UIImage imageNamed:@"guaidTip1"];
+        }else{
+            imageView.image = [UIImage imageNamed:@"guaidTip2"];
+        }
+    }
+    
+}
+
+/// MARK:- 隐藏
+- (void)hide{
+    if (self.shouldHidden) {
+        self.shouldHidden();
+    }
+}
+
+- (void)dealloc{
+    
+}
+
+
+@end
+
+NSString * const kLastNullImageName = @"kLastNullImageName";
+
+NSString * const kImageNamesArray = @"kImageNamesArray";
+
+NSString * const kHiddenBtnImageName = @"kHiddenBtnImageName";
+
+NSString * const kHiddenBtnCenter = @"kHiddenBtnCenter";
+

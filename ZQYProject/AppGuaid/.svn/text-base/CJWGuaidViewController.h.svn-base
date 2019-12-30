@@ -1,0 +1,25 @@
+//
+//  CJWGuaidViewController.h
+//  AgriculturalProduct
+//
+//  Created by 古鹏 on 2017/10/27.
+//  Copyright © 2017年 cjwsc. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface CJWGuaidViewController : UIViewController
+
+@property (nonatomic, strong) NSArray<NSString*>* imageNames;
+
+@property (nonatomic, copy) dispatch_block_t shouldHidden;
+
+@end
+
+UIKIT_EXTERN NSString * const kLastNullImageName;
+
+UIKIT_EXTERN NSString * const kImageNamesArray;
+
+UIKIT_EXTERN NSString * const kHiddenBtnImageName;
+
+UIKIT_EXTERN NSString * const kHiddenBtnCenter;

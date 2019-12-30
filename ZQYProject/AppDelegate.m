@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDelegate+NetWorkConfiguration.h"
+#import "CYLMainRootViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //配置网络请求
+    [self configNetWorkWithOptions:launchOptions];
+    
+    self.window = [[UIWindow alloc] init];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    
+    CYLMainRootViewController *rootViewController = [[CYLMainRootViewController alloc] init];
+    [self.window setRootViewController:rootViewController];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

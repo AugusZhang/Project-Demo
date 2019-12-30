@@ -1,0 +1,47 @@
+//
+//  CJWGuaidViewCell.m
+//  AgriculturalProduct
+//
+//  Created by 古鹏 on 2017/10/27.
+//  Copyright © 2017年 cjwsc. All rights reserved.
+//
+
+#import "CJWGuaidViewCell.h"
+
+@implementation CJWGuaidViewCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        self.contentImageView = [[UIImageView alloc] init];
+        self.contentImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.contentImageView.userInteractionEnabled = YES;
+        [self.contentView addSubview:self.contentImageView];
+        
+        [self.contentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.mas_centerX);
+            make.centerY.equalTo(self.mas_centerY).offset(-50/kScal);
+            make.width.equalTo(300*kScal);
+            make.height.equalTo(420*kScal);
+        }];
+    }
+    return self;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+//    self.contentImageView.frame = self.contentView.bounds;
+    
+    
+}
+
+@end
+
+NSString * const CJWGuaidViewCellID = @"KSGuaidViewCellID";
+

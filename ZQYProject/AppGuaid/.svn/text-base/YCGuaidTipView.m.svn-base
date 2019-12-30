@@ -1,0 +1,23 @@
+//
+//  YCGuaidTipView.m
+//  CarStore
+//
+//  Created by apple on 2019/5/14.
+//  Copyright © 2019年 ycxc. All rights reserved.
+//
+
+#import "YCGuaidTipView.h"
+
+@implementation YCGuaidTipView
+
+- (instancetype)init {
+    
+    self = [super init];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"YCGuaidTipView" owner:self options:nil] lastObject];
+    if (self) {
+        
+    }
+    return self;
+}
+
+@end

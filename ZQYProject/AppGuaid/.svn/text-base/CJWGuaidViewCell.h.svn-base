@@ -1,0 +1,17 @@
+//
+//  CJWGuaidViewCell.h
+//  AgriculturalProduct
+//
+//  Created by 古鹏 on 2017/10/27.
+//  Copyright © 2017年 cjwsc. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface CJWGuaidViewCell : UICollectionViewCell
+
+@property (nonatomic, strong) UIImageView* contentImageView;
+
+@end
+
+UIKIT_EXTERN NSString * const CJWGuaidViewCellID;

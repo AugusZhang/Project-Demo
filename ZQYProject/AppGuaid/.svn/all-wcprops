@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid
+END
+CJWGuaidViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/CJWGuaidViewController.h
+END
+CJWGuaidViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/CJWGuaidViewCell.m
+END
+YCGuaidTipView.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/YCGuaidTipView.h
+END
+AppDelegate+Guaid.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/AppDelegate+Guaid.h
+END
+KSGuaidProperty.plist
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/KSGuaidProperty.plist
+END
+CJWGuaidViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/CJWGuaidViewController.m
+END
+YCGuaidTipView.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/YCGuaidTipView.m
+END
+AppDelegate+Guaid.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/AppDelegate+Guaid.m
+END
+CJWGuaidViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/CJWGuaidViewCell.h
+END
+YCGuaidTipView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/zc/!svn/ver/15661/TTVI/trunk/IOS/code/CarStore/CarStore/Class/Guaid/YCGuaidTipView.xib
+END
